@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Pastor - Messiah Baptist Church</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Specific styles for the pastor page content */
+        .pastor-content {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .pastor-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .pastor-portrait {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #f0f8ff;
+            box-shadow: var(--shadow-md);
+            flex-shrink: 0;
+        }
+
+        .pastor-intro h2 {
+            color: var(--primary-dark);
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .pastor-intro p {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .pastor-message p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .signature {
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        .signature-name {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .signature-role {
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .signature-church {
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .pastor-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .pastor-portrait {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <header class="site-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <h1>Messiah Baptist Church</h1>
+                        <p class="tagline">Preaches what the Bible Teaches</p>
+                    </div>
+                    <div class="header-info">
+                        <p>145 Rivera St., Baesa Rd., Caloocan City, Philippines</p>
+                        <p id="current-time-header">Loading time...</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <nav id="main-nav" class="main-nav">
+            <div class="container">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="beliefs.html">Beliefs</a></li>
+                    <li><a href="pastor.html" class="active">Our Pastor</a></li>
+                    <li><a href="staff.html">Our Staff</a></li>
+                    <li><a href="ministries.html">Ministries</a></li>
+                    <li><a href="missionaries.html">Missionaries</a></li>
+                    <li><a href="sermons.html">Sermon Outlines</a></li>
+                    <li><a href="bible-studies.html">Bible Studies</a></li>
+                    <li><a href="institute.html">Bible Institute</a></li>
+                    <li><a href="saved.html">How to be Saved</a></li>
+                    <li><a href="gallery.html">Photo Gallery</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="main-layout container">
+            <main class="content-area">
+                <section class="hero" style="height: 200px;">
+                    <div class="hero-image-placeholder" style="height: 100%;">
+                        <div class="hero-content">
+                            <h2>Words of Welcome</h2>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="pastor-content">
+                    <div class="pastor-header">
+                        <img src="./images/pastor.jpg" alt="Pastor Andres C. Guevara Jr." class="pastor-portrait">
+                        <div class="pastor-intro">
+                            <h2>Welcome to Messiah Baptist Church</h2>
+                            <p><em>I do appreciate your visit in our website.</em></p>
+                        </div>
+                    </div>
+
+                    <div class="pastor-message">
+                        <p>As you navigate the pages thru our homepage, I hope you will be blessed and uplifted how God
+                            has blessed the ministry here in our place. The ministry of this church is centered in the
+                            preaching of the Word of God. It is our belief that the Bible has all the answers for those
+                            perplexing questions we face in these challenging days.</p>
+
+                        <p>If you are looking for a church full of common people who sincerely love God, and want to
+                            serve Him and be a blessing to you and to your family. You've found it. I would count it a
+                            privilege to welcome you to our services and be our special guest. We would be honored for
+                            you to choose Messiah Baptist Church as your place of worship, so come and grow with us.</p>
+
+                        <p>Thank you for visiting our website.</p>
+
+                        <p>Take a few moments to look over the different pages. You may find the information interesting
+                            and helpful. If there is anything I can do to be a blessing, please do not hesitate to
+                            contact me. It is my pleasure to serve you in any way. The MBC family and I will be glad to
+                            meet you.</p>
+
+                        <p><strong>Hope to see you in our church real soon!</strong></p>
+
+                        <div class="signature">
+                            <p>Your servant for Jesus Christ' sake,</p>
+                            <div class="signature-name">Andres C. Guevara Jr.</div>
+                            <div class="signature-role">Pastor</div>
+                            <div class="signature-church">Messiah Baptist Church of Baesa</div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <aside class="sidebar">
+                <div class="sidebar-card">
+                    <h3>Get in Touch</h3>
+                    <p><strong>Address:</strong></p>
+                    <p class="small-text">145 Rivera St., Baesa Rd.<br>Caloocan City, Philippines</p>
+                    <a href="contact.html" class="btn-outline">Contact Us</a>
+                </div>
+            </aside>
+        </div>
+                <!-- Footer -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>About Us</h3>
+                        <p>Messiah Baptist Church is a Bible-believing church dedicated to preaching the Word of God and serving our community in Caloocan City, Philippines.</p>
+                        <div class="footer-social">
+                            <a href="https://facebook.com/messiahbcbaesa" target="_blank" rel="noopener noreferrer" class="social-icon">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                            <a href="mailto:mbcphilippines@yahoo.com" class="social-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="beliefs.html">Our Beliefs</a></li>
+                            <li><a href="pastor.html">Our Pastor</a></li>
+                            <li><a href="ministries.html">Ministries</a></li>
+                            <li><a href="sermons.html">Sermons</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Contact Info</h3>
+                        <div class="footer-contact-info">
+                            <div class="footer-contact-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>145 Rivera St., Baesa Rd.<br>Caloocan City, Philippines</span>
+                            </div>
+                            <div class="footer-contact-item">
+                                <i class="fa-solid fa-envelope"></i>
+                                <a href="mailto:mbcphilippines@yahoo.com">mbcphilippines@yahoo.com</a>
+                            </div>
+                            <div class="footer-contact-item">
+                                <i class="fa-solid fa-clock"></i>
+                                <span>Sunday Services<br>9:00 AM - 6:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Messiah Baptist Church. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="/main.js"></script>
+</body>
+
+</html>
