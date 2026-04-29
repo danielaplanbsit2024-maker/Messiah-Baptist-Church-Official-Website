@@ -14,60 +14,96 @@
         rel="stylesheet">
     <style>
         /* Specific styles for the pastor page content */
-        .pastor-content {
+        .pastor-grid-section {
+            padding: 2rem 0;
+        }
+
+        .pastor-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .pastor-image-wrapper {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 8px solid var(--white);
             background: var(--white);
-            padding: 3rem;
+            margin-top: -80px; /* Slight overlap effect with hero */
+            z-index: 10;
+        }
+
+        .pastor-image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            border-radius: calc(var(--radius) - 4px);
+        }
+
+        .pastor-text-content {
+            background: var(--white);
+            padding: 3.5rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
+            position: relative;
+            z-index: 5;
         }
 
-        .pastor-header {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            align-items: flex-start;
-        }
-
-        .pastor-portrait {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid #f0f8ff;
-            box-shadow: var(--shadow-md);
-            flex-shrink: 0;
-        }
-
-        .pastor-intro h2 {
+        .pastor-title {
             color: var(--primary-dark);
             font-family: var(--font-heading);
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
         }
 
-        .pastor-intro p {
-            margin-bottom: 1rem;
-            color: var(--text-color);
+        .pastor-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-blue);
+            border-radius: 2px;
         }
 
-        .pastor-message p {
+        .pastor-message-body p {
             margin-bottom: 1.5rem;
             line-height: 1.8;
+            color: var(--text-color);
+            font-size: 1.05rem;
+        }
+
+        /* Drop cap for first paragraph */
+        .pastor-message-body p:first-of-type::first-letter {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 1;
+            font-family: var(--font-heading);
+            color: var(--primary-blue);
+            margin-right: 0.5rem;
+            margin-top: -0.2rem;
         }
 
         .signature {
-            margin-top: 2rem;
+            margin-top: 3rem;
             border-top: 1px solid var(--border-color);
-            padding-top: 1.5rem;
+            padding-top: 2rem;
         }
 
         .signature-name {
             font-family: var(--font-heading);
-            font-size: 1.4rem;
+            font-size: 2rem;
             color: var(--primary-dark);
-            font-weight: 700;
-            margin-bottom: 0.25rem;
+            font-style: italic;
+            margin: 0.5rem 0;
         }
 
         .signature-role {
@@ -85,15 +121,20 @@
             margin-top: 0.25rem;
         }
 
-        @media (max-width: 768px) {
-            .pastor-header {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
+        @media (max-width: 992px) {
+            .pastor-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
-
-            .pastor-portrait {
-                margin-bottom: 1rem;
+            
+            .pastor-image-wrapper {
+                max-width: 400px;
+                margin: 0 auto;
+                margin-top: -40px;
+            }
+            
+            .pastor-text-content {
+                padding: 2rem;
             }
         }
     </style>
@@ -144,40 +185,41 @@
                     </div>
                 </section>
 
-                <section class="pastor-content">
-                    <div class="pastor-header">
-                        <img src="./images/pastor.jpg" alt="Pastor Andres C. Guevara Jr." class="pastor-portrait">
-                        <div class="pastor-intro">
-                            <h2>Welcome to Messiah Baptist Church</h2>
-                            <p><em>I do appreciate your visit in our website.</em></p>
+                <section class="pastor-grid-section">
+                    <div class="pastor-grid">
+                        <div class="pastor-image-wrapper">
+                            <!-- We sync the image with the home page by using data-page="home" and data-content-id="pastor_image" -->
+                            <img src="./images/pastor.png" alt="Pastor" class="pastor-portrait" data-page="home" data-content-id="pastor_image">
                         </div>
-                    </div>
+                        <div class="pastor-text-content">
+                            <h2 class="pastor-title" data-page="pastor" data-content-id="pastor_welcome_title">Welcome to Messiah Baptist Church</h2>
+                            <div class="pastor-message-body" data-page="pastor" data-content-id="pastor_message">
+                                <p>As you navigate the pages thru our homepage, I hope you will be blessed and uplifted how God
+                                    has blessed the ministry here in our place. The ministry of this church is centered in the
+                                    preaching of the Word of God. It is our belief that the Bible has all the answers for those
+                                    perplexing questions we face in these challenging days.</p>
 
-                    <div class="pastor-message">
-                        <p>As you navigate the pages thru our homepage, I hope you will be blessed and uplifted how God
-                            has blessed the ministry here in our place. The ministry of this church is centered in the
-                            preaching of the Word of God. It is our belief that the Bible has all the answers for those
-                            perplexing questions we face in these challenging days.</p>
+                                <p>If you are looking for a church full of common people who sincerely love God, and want to
+                                    serve Him and be a blessing to you and to your family. You've found it. I would count it a
+                                    privilege to welcome you to our services and be our special guest. We would be honored for
+                                    you to choose Messiah Baptist Church as your place of worship, so come and grow with us.</p>
 
-                        <p>If you are looking for a church full of common people who sincerely love God, and want to
-                            serve Him and be a blessing to you and to your family. You've found it. I would count it a
-                            privilege to welcome you to our services and be our special guest. We would be honored for
-                            you to choose Messiah Baptist Church as your place of worship, so come and grow with us.</p>
+                                <p>Thank you for visiting our website.</p>
 
-                        <p>Thank you for visiting our website.</p>
+                                <p>Take a few moments to look over the different pages. You may find the information interesting
+                                    and helpful. If there is anything I can do to be a blessing, please do not hesitate to
+                                    contact me. It is my pleasure to serve you in any way. The MBC family and I will be glad to
+                                    meet you.</p>
 
-                        <p>Take a few moments to look over the different pages. You may find the information interesting
-                            and helpful. If there is anything I can do to be a blessing, please do not hesitate to
-                            contact me. It is my pleasure to serve you in any way. The MBC family and I will be glad to
-                            meet you.</p>
+                                <p><strong>Hope to see you in our church real soon!</strong></p>
+                            </div>
 
-                        <p><strong>Hope to see you in our church real soon!</strong></p>
-
-                        <div class="signature">
-                            <p>Your servant for Jesus Christ' sake,</p>
-                            <div class="signature-name">Andres C. Guevara Jr.</div>
-                            <div class="signature-role">Pastor</div>
-                            <div class="signature-church">Messiah Baptist Church of Baesa</div>
+                            <div class="signature">
+                                <p data-page="pastor" data-content-id="pastor_signature_intro">Your servant for Jesus Christ' sake,</p>
+                                <div class="signature-name" data-page="pastor" data-content-id="pastor_signature_name">Andres C. Guevara Jr.</div>
+                                <div class="signature-role" data-page="pastor" data-content-id="pastor_signature_role">Pastor</div>
+                                <div class="signature-church" data-page="pastor" data-content-id="pastor_signature_church">Messiah Baptist Church of Baesa</div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -246,7 +288,7 @@
             </div>
         </footer>
     </div>
-    <script type="module" src="/main.js"></script>
+    <script type="module" src="./main.js"></script>
 </body>
 
 </html>
