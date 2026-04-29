@@ -5,7 +5,7 @@ import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const dbPath = path.join(__dirname, 'database.sqlite');
+const dbPath = path.join(__dirname, process.env.DB_NAME || 'database.sqlite');
 
 // Instead of deleting the file (which fails if server has it locked),
 // we DROP existing tables and recreate them.
@@ -19,6 +19,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
 
 db.serialize(() => {
   // Drop existing tables to start fresh
+  db.run(`DROP TABLE IF EXISTS admins`);
   db.run(`DROP TABLE IF EXISTS bible_studies`);
   db.run(`DROP TABLE IF EXISTS page_content`);
 
@@ -42,6 +43,20 @@ db.serialize(() => {
       UNIQUE(page_name, content_key)
     )
   `);
+
+  // Create admins table
+  db.run(`
+    CREATE TABLE admins (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      username TEXT NOT NULL UNIQUE,
+      password TEXT NOT NULL
+    )
+  `);
+
+  // Add default admin (username: admin, password: admin123)
+  db.run(`INSERT OR IGNORE INTO admins (username, password) VALUES (?, ?)`, 
+    ['admin', '$2b$10$Vpeyxl6kx2aJYFKCuB2ae.rtdF8MmFLcnWUYOm36iGXn/JHc8Gai2']); 
+
 
   // Default data for lists
   const defaultSchedules = [

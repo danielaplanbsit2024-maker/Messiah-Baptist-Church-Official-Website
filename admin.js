@@ -1,5 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const API_URL = 'http://localhost:3001/api';
+    const API_URL = window.location.protocol === 'file:'
+        ? 'http://localhost:3002/api'
+        : '/api';
+
+    function apiFetch(path, options = {}) {
+        return fetch(`${API_URL}${path}`, {
+            credentials: 'include',
+            ...options
+        });
+    }
+
+    // --- AUTH CHECK ---
+    async function checkAuth() {
+        try {
+            const response = await apiFetch('/auth/check');
+            const data = await response.json();
+            if (!data.authenticated) {
+                window.location.href = window.location.protocol === 'file:'
+                    ? 'http://localhost:3002/login.html'
+                    : './login.html';
+            } else {
+                document.getElementById('admin-username-display').textContent = data.username;
+            }
+        } catch (error) {
+            console.error('Auth check failed:', error);
+        }
+    }
+    checkAuth();
+
 
     // --- QUILL TOOLBARS ---
     const toolbarOptions = [
@@ -101,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('image', file);
 
         try {
-            const response = await fetch(`${API_URL}/upload`, { method: 'POST', body: formData });
+            const response = await apiFetch('/upload', { method: 'POST', body: formData });
             if (response.ok) {
                 const data = await response.json();
                 document.getElementById(hiddenInputId).value = data.url; // Save path
@@ -177,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- PAGE CONTENT LOGIC ---
     async function loadPageContent(pageName) {
         try {
-            const response = await fetch(`${API_URL}/content/${pageName}`);
+            const response = await apiFetch(`/content/${pageName}`);
             if (response.ok) {
                 const data = await response.json();
                 const form = document.getElementById(`form-${pageName}`);
@@ -254,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const response = await fetch(`${API_URL}/content/${pageName}`, {
+                const response = await apiFetch(`/content/${pageName}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(updates)
@@ -275,9 +303,20 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPageContent('global');
     loadPageContent('beliefs');
 
+    // --- LOGOUT ---
+    const logoutBtn = document.getElementById('btn-logout');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+            await apiFetch('/auth/logout', { method: 'POST' });
+            window.location.href = window.location.protocol === 'file:'
+                ? 'http://localhost:3002/login.html'
+                : './login.html';
+        });
+    }
+
     // --- BIBLE STUDIES (Existing logic stripped down for brevity) ---
     async function fetchStudies() {
-        const response = await fetch(`${API_URL}/bible-studies`);
+        const response = await apiFetch('/bible-studies');
         const groupedStudies = await response.json();
         const tbody = document.getElementById('studies-table-body');
         tbody.innerHTML = '';
@@ -291,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('#panel-biblestudies .btn-delete').forEach(btn => {
             btn.addEventListener('click', async (e) => {
                 if (confirm('Delete?')) {
-                    await fetch(`${API_URL}/bible-studies/${e.currentTarget.dataset.id}`, {method: 'DELETE'});
+                    await apiFetch(`/bible-studies/${e.currentTarget.dataset.id}`, { method: 'DELETE' });
                     fetchStudies();
                 }
             });
@@ -300,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('add-study-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const body = JSON.stringify({ category: document.getElementById('category').value, title: document.getElementById('title').value, link: document.getElementById('link').value });
-        await fetch(`${API_URL}/bible-studies`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body });
+        await apiFetch('/bible-studies', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
         fetchStudies();
         e.target.reset();
     });

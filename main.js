@@ -1,4 +1,8 @@
 // Toggle Mobile Menu
+const API_URL = window.location.protocol === 'file:'
+    ? 'http://localhost:3002/api'
+    : '/api';
+
 const menuToggle = document.getElementById('menu-toggle');
 const mainNav = document.getElementById('main-nav');
 
@@ -42,6 +46,53 @@ function highlightActiveMenuItem() {
     });
 }
 
+function applyGlobalFallbacks(contentData) {
+    const address = contentData['church_address'];
+    if (!address) return;
+
+    document.querySelectorAll('.header-info > p:first-child').forEach((el) => {
+        el.innerHTML = address;
+    });
+
+    document.querySelectorAll('.sidebar .sidebar-card .small-text').forEach((el) => {
+        el.innerHTML = address;
+    });
+
+    document.querySelectorAll('.footer-contact-item:first-child span').forEach((el) => {
+        el.innerHTML = address;
+    });
+}
+
+function applyHomeFallbacks(contentData) {
+    const pastorImage = contentData['pastor_image'];
+    const pastorName = contentData['pastor_name'];
+    const pastorRole = contentData['pastor_role'];
+
+    if (pastorImage) {
+        document.querySelectorAll('.pastor-sidebar-image, .pastor-portrait').forEach((img) => {
+            img.src = pastorImage;
+        });
+
+        document.querySelectorAll('.pastor-image-placeholder').forEach((el) => {
+            el.style.backgroundImage = `url('${pastorImage}')`;
+            el.style.backgroundSize = 'cover';
+            el.style.backgroundPosition = 'center';
+        });
+    }
+
+    if (pastorName) {
+        document.querySelectorAll('.pastor-card h3, .signature-name').forEach((el) => {
+            el.textContent = pastorName;
+        });
+    }
+
+    if (pastorRole) {
+        document.querySelectorAll('.pastor-card .role').forEach((el) => {
+            el.textContent = pastorRole;
+        });
+    }
+}
+
 setInterval(updateTime, 1000);
 updateTime();
 highlightActiveMenuItem();
@@ -52,7 +103,7 @@ async function fetchBibleStudies() {
     if (!container) return; // Only run on the bible studies page
 
     try {
-        const response = await fetch('http://localhost:3001/api/bible-studies');
+        const response = await fetch(`${API_URL}/bible-studies`);
         if (!response.ok) throw new Error('Failed to fetch studies');
         const groupedStudies = await response.json();
         
@@ -109,7 +160,7 @@ async function injectDynamicContent() {
 
     for (const pageName of pagesToFetch) {
         try {
-            const response = await fetch(`http://localhost:3001/api/content/${pageName}`);
+            const response = await fetch(`${API_URL}/content/${pageName}`);
             if (response.ok) {
                 const contentData = await response.json();
 
@@ -169,8 +220,14 @@ async function injectDynamicContent() {
                     }
                 });
 
+                if (pageName === 'global') {
+                    applyGlobalFallbacks(contentData);
+                }
+
                 // --- Handle complex lists for the home page ---
                 if (pageName === 'home') {
+                    applyHomeFallbacks(contentData);
+
                     // Service Schedules
                     if (contentData['schedules_json']) {
                         const schedules = JSON.parse(contentData['schedules_json']);
