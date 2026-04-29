@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Messiah Baptist Church</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Quill.js Rich Text Editor -->
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+
+    <style>
+        .admin-layout {
+            display: flex;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .admin-sidebar {
+            flex: 0 0 250px;
+            background: #111;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            align-self: flex-start;
+        }
+
+        .admin-sidebar h3 {
+            color: #d4af37;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .admin-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .admin-sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .admin-sidebar a {
+            color: #ccc;
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .admin-sidebar a:hover,
+        .admin-sidebar a.active {
+            background: #222;
+            color: #fff;
+        }
+
+        .admin-content-area {
+            flex: 1;
+            background: #111;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d4af37;
+            font-weight: 500;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="url"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .admin-table th {
+            color: #d4af37;
+        }
+
+        .btn-delete {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .btn-add {
+            background: #333;
+            color: white;
+            border: 1px solid #555;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .btn-add:hover {
+            background: #444;
+        }
+
+        .section-panel {
+            display: none;
+        }
+
+        .section-panel.active {
+            display: block;
+        }
+
+        .list-editor {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            margin-bottom: 20px;
+        }
+
+        .list-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .image-preview-box {
+            width: 100%;
+            max-width: 300px;
+            height: 150px;
+            border: 1px dashed #555;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-top: 10px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .section-divider {
+            border-bottom: 1px solid #333;
+            margin: 30px 0;
+            padding-bottom: 10px;
+            color: #fff;
+            font-size: 1.2em;
+        }
+
+        /* Belief Section Row */
+        .belief-row {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .belief-row-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .belief-row-header input[type="text"] {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #d4af37;
+            background: transparent;
+            border: none;
+            border-bottom: 1px dashed #555;
+            padding: 4px 0;
+            width: calc(100% - 110px);
+            font-family: inherit;
+        }
+
+        .belief-row-header input[type="text"]:focus {
+            outline: none;
+            border-bottom-color: #d4af37;
+        }
+
+        .btn-delete-belief {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .btn-add-belief {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 2px dashed #555;
+            color: #aaa;
+            padding: 14px;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-add-belief:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Messiah Baptist Church - ADMIN</h1>
+                </div>
+                <div class="header-info">
+                    <a href="index.html" class="btn-outline" style="border-color: #333; padding: 5px 15px;">Back to
+                        Site</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <h3>Manage Pages</h3>
+            <ul>
+                <li><a data-target="panel-home" class="active">Home Page</a></li>
+                <li><a data-target="panel-beliefs">Beliefs Page</a></li>
+                <li><a data-target="panel-global">Global Elements</a></li>
+                <li><a data-target="panel-missionaries">Missionaries Page</a></li>
+            </ul>
+            <h3 style="margin-top: 30px;">Manage Data</h3>
+            <ul>
+                <li><a data-target="panel-biblestudies">Bible Studies List</a></li>
+            </ul>
+        </aside>
+
+        <main class="admin-content-area">
+
+            <!-- Home Page Editor -->
+            <div id="panel-home" class="section-panel active">
+                <h2>Edit Home Page</h2>
+                <form id="form-home" data-page="home">
+
+                    <div class="section-divider">Hero Section</div>
+                    <div class="form-group">
+                        <label for="home_hero_title">Main Title</label>
+                        <input type="text" id="home_hero_title" name="hero_title">
+                    </div>
+                    <div class="form-group">
+                        <label for="home_hero_subtitle">Subtitle</label>
+                        <input type="text" id="home_hero_subtitle" name="hero_subtitle">
+                    </div>
+                    <div class="form-group">
+                        <label>Background Image</label>
+                        <input type="hidden" id="hero_image_input" name="hero_image">
+                        <input type="file" id="hero_image_file" accept="image/*" class="file-upload-input">
+                        <div class="image-preview-box" id="hero_image_preview">No Image Selected</div>
+                    </div>
+
+                    <div class="section-divider">Service Schedules</div>
+                    <div class="list-editor" id="schedules-editor">
+                        <!-- Rows injected by JS -->
+                    </div>
+                    <button type="button" class="btn-add" onclick="addScheduleRow()">+ Add Schedule Row</button>
+                    <!-- Hidden field to store JSON -->
+                    <input type="hidden" name="schedules_json" id="schedules_json_input">
+
+                    <div class="section-divider">Recent Messages Cards</div>
+                    <div class="list-editor" id="messages-editor">
+                        <!-- Rows injected by JS -->
+                    </div>
+                    <button type="button" class="btn-add" onclick="addMessageRow()">+ Add Message Card</button>
+                    <!-- Hidden field to store JSON -->
+                    <input type="hidden" name="messages_json" id="messages_json_input">
+
+                    <div class="section-divider">Pastor Sidebar</div>
+                    <div class="form-group">
+                        <label>Pastor Image</label>
+                        <input type="hidden" id="pastor_image_input" name="pastor_image">
+                        <input type="file" id="pastor_image_file" accept="image/*" class="file-upload-input">
+                        <div class="image-preview-box" id="pastor_image_preview"
+                            style="width: 150px; height: 150px; border-radius: 50%;">No Image</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Pastor Name</label>
+                        <input type="text" name="pastor_name">
+                    </div>
+                    <div class="form-group">
+                        <label>Pastor Role</label>
+                        <input type="text" name="pastor_role">
+                    </div>
+                    <div class="form-group">
+                        <label>Welcome Quote</label>
+                        <input type="hidden" name="pastor_quote" id="input_pastor_quote">
+                        <div id="editor_pastor_quote" style="height: 150px; background: white; color: black;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Quote Highlight (Bottom Line)</label>
+                        <input type="text" name="pastor_highlight">
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="margin-top: 30px; width: 100%;">Save Home Page
+                        Content</button>
+                </form>
+            </div>
+
+            <!-- Global Elements Editor -->
+            <div id="panel-global" class="section-panel">
+                <h2>Edit Global Elements</h2>
+                <form id="form-global" data-page="global">
+                    <div class="form-group">
+                        <label for="global_church_address">Church Address (Header/Footer)</label>
+                        <textarea id="global_church_address" name="church_address"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Save Global Content</button>
+                </form>
+            </div>
+
+            <!-- Panel: Beliefs Page -->
+            <div id="panel-beliefs" class="section-panel">
+                <h2>Manage Beliefs Page</h2>
+                <p style="color: #888; margin-bottom: 20px;">Add, edit, rename, or delete any Doctrinal Statement section. Use the rich text editor for full formatting control.</p>
+                <form id="form-beliefs" data-page="beliefs">
+
+                    <!-- Dynamic sections are injected here by admin.js -->
+                    <div id="beliefs-sections-container"></div>
+
+                    <button type="button" class="btn-add-belief" id="btn-add-belief-section">
+                        <i class="fa-solid fa-plus"></i> Add New Belief Section
+                    </button>
+
+                    <button type="submit" class="btn-primary" style="margin-top: 20px; width: 100%;">Save Beliefs Content</button>
+                </form>
+            </div>
+
+            <div id="panel-missionaries" class="section-panel">
+                <h2>Edit Missionaries Page</h2>
+                <p>Coming soon...</p>
+            </div>
+
+            <!-- Bible Studies Editor -->
+            <div id="panel-biblestudies" class="section-panel">
+                <h2>Manage Bible Studies</h2>
+                <form id="add-study-form"
+                    style="background: #1a1a1a; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" required>
+                            <option value="BIBLE LESSONS">BIBLE LESSONS</option>
+                            <option value="END TIMES PROPHECY">END TIMES PROPHECY</option>
+                            <option value="SALVATION LESSONS">SALVATION LESSONS</option>
+                            <option value="DOCTRINAL STUDY">DOCTRINAL STUDY</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" required placeholder="e.g. Introduction to Genesis">
+                    </div>
+                    <div class="form-group">
+                        <label for="link">Link URL</label>
+                        <input type="url" id="link" required placeholder="http://...">
+                    </div>
+                    <button type="submit" class="btn-primary">Add Bible Study</button>
+                </form>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Title</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studies-table-body"></tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+    <script type="module" src="./admin.js"></script>
+</body>
+
+</html>

@@ -26,7 +26,7 @@
                         <p class="tagline">Preaches what the Bible Teaches</p>
                     </div>
                     <div class="header-info">
-                        <p>145 Rivera St., Baesa Rd., Caloocan City, Philippines</p>
+                        <p data-content-id="church_address" data-page="global">145 Rivera St., Baesa Rd., Caloocan City, Philippines</p>
                         <p id="current-time-header">Loading time...</p>
                     </div>
                 </div>
@@ -57,63 +57,25 @@
             <!-- Main Content -->
             <main class="content-area">
                 <section class="hero">
-                    <div class="hero-image-placeholder">
+                    <div class="hero-image-placeholder" data-bg-id="hero_image" data-page="home">
                         <div class="hero-content">
-                            <h2>Welcome to Our Church Family</h2>
-                            <p>Join us as we worship, learn, and grow together in faith</p>
+                            <h2 data-content-id="hero_title" data-page="home">Welcome to Our Church Family</h2>
+                            <p data-content-id="hero_subtitle" data-page="home">Join us as we worship, learn, and grow together in faith</p>
                         </div>
                     </div>
                 </section>
 
                 <section class="schedules">
                     <h2>Service Schedules</h2>
-                    <div class="schedule-list">
-                        <div class="schedule-item">
-                            <span class="day">Sunday School</span>
-                            <span class="time">9:00 AM</span>
-                        </div>
-                        <div class="schedule-item">
-                            <span class="day">Morning Worship</span>
-                            <span class="time">10:00 AM</span>
-                        </div>
-                        <div class="schedule-item">
-                            <span class="day">Evening Service</span>
-                            <span class="time">6:00 PM</span>
-                        </div>
-                        <div class="schedule-item">
-                            <span class="day">Wednesday Prayer & Bible Studies</span>
-                            <span class="time">6:30 PM</span>
-                        </div>
+                    <div class="schedule-list" id="schedules-container">
+                        <!-- Dynamic schedules injected here -->
                     </div>
                 </section>
 
                 <section class="featured-links">
                     <h2>Recent Messages & Studies</h2>
-                    <div class="cards-grid">
-                        <div class="card">
-                            <div class="card-icon">📖</div>
-                            <h3>First Missionary Journey of Paul</h3>
-                            <p class="subtext">Sunday School Lessons</p>
-                            <a href="#" class="btn-outline">Read More</a>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon">✨</div>
-                            <h3>Dispensation of Conscience</h3>
-                            <p class="subtext">Wednesday Bible Studies</p>
-                            <a href="#" class="btn-outline">Read More</a>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon">🙏</div>
-                            <h3>Blessed by Forgiveness</h3>
-                            <p class="subtext">Morning Worship Sermon Outline</p>
-                            <a href="#" class="btn-outline">Read More</a>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon">🏛️</div>
-                            <h3>Building our Church</h3>
-                            <p class="subtext">Evening Service sermon-outline</p>
-                            <a href="#" class="btn-outline">Read More</a>
-                        </div>
+                    <div class="cards-grid" id="messages-container">
+                        <!-- Dynamic cards injected here -->
                     </div>
                 </section>
             </main>
@@ -121,17 +83,17 @@
             <!-- Sidebar -->
             <aside class="sidebar">
                 <div class="pastor-card">
-                    <img src="./images/pastor.jpg" alt="Pastor Andres C. Guevara Jr." class="pastor-sidebar-image">
-                    <h3>Andres C. Guevara Jr.</h3>
-                    <p class="role">PASTOR</p>
+                    <img src="./images/pastor.jpg" alt="Pastor" class="pastor-sidebar-image" data-content-id="pastor_image" data-page="home">
+                    <h3 data-content-id="pastor_name" data-page="home">Andres C. Guevara Jr.</h3>
+                    <p class="role" data-content-id="pastor_role" data-page="home">PASTOR</p>
                 </div>
 
                 <div class="sidebar-card blue-card">
                     <h3>Words from Our Pastor</h3>
-                    <p class="quote">"We are so glad you visited our website. It is our privilege to have you as our
+                    <p class="quote" data-content-id="pastor_quote" data-page="home">"We are so glad you visited our website. It is our privilege to have you as our
                         special guest. We assure you this is the place you are looking for. It is our purpose to glorify
-                        God and help you to live in His will. </p>
-                    <p class="quote-highlight">PLEASE COME AND VISIT US. Bring your family and all your friends!"</p>
+                        God and help you to live in His will.</p>
+                    <p class="quote-highlight" data-content-id="pastor_highlight" data-page="home">PLEASE COME AND VISIT US. Bring your family and all your friends!"</p>
                     <a href="pastor.html" class="btn-outline-white">Read Full Welcome Message</a>
                 </div>
 
@@ -195,7 +157,7 @@
                         <div class="footer-contact-info">
                             <div class="footer-contact-item">
                                 <i class="fa-solid fa-location-dot"></i>
-                                <span>145 Rivera St., Baesa Rd.<br>Caloocan City, Philippines</span>
+                                <span data-content-id="church_address" data-page="global">145 Rivera St., Baesa Rd.<br>Caloocan City, Philippines</span>
                             </div>
                             <div class="footer-contact-item">
                                 <i class="fa-solid fa-envelope"></i>
