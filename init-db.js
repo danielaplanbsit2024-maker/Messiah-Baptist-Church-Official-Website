@@ -249,7 +249,7 @@ We teach that after the closing of the millennium, the temporary release of Sata
     { page_name: 'home', content_key: 'hero_title', content_value: 'Messiah Baptist Church' },
     { page_name: 'home', content_key: 'hero_subtitle', content_value: 'Preaches what the Bible Teaches' },
     { page_name: 'home', content_key: 'hero_image', content_value: '' }, // default CSS handles the empty bg for now
-    { page_name: 'home', content_key: 'pastor_image', content_value: './images/pastor.jpg' },
+    { page_name: 'home', content_key: 'pastor_image', content_value: './images/pastor.png' },
     { page_name: 'home', content_key: 'pastor_name', content_value: 'Andres C. Guevara Jr.' },
     { page_name: 'home', content_key: 'pastor_role', content_value: 'PASTOR' },
     { page_name: 'home', content_key: 'pastor_quote', content_value: '"We are so glad you visited our website. It is our privilege to have you as our special guest. We assure you this is the place you are looking for. It is our purpose to glorify God and help you to live in His will.' },

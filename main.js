@@ -1,7 +1,14 @@
 // Toggle Mobile Menu
-const API_URL = window.location.protocol === 'file:'
-    ? 'http://localhost:3002/api'
-    : '/api';
+const API_URL = (() => {
+    const { hostname, port, protocol } = window.location;
+    if (protocol === 'file:') {
+        return 'http://localhost:3002/api';
+    }
+    if ((hostname === 'localhost' || hostname === '127.0.0.1') && port !== '3002') {
+        return `http://${hostname}:3002/api`;
+    }
+    return '/api';
+})();
 
 const menuToggle = document.getElementById('menu-toggle');
 const mainNav = document.getElementById('main-nav');
@@ -150,11 +157,13 @@ async function fetchBibleStudies() {
 async function injectDynamicContent() {
     const dynamicElements = document.querySelectorAll('[data-content-id], [data-bg-id]');
     const beliefsContainer = document.getElementById('beliefs-container');
+    const staffContainer = document.getElementById('staff-container');
     
     // Determine which pages we need to fetch
     const pagesToFetch = new Set();
     dynamicElements.forEach(el => pagesToFetch.add(el.getAttribute('data-page')));
     if (beliefsContainer) pagesToFetch.add('beliefs');
+    if (staffContainer) pagesToFetch.add('staff');
     
     if (pagesToFetch.size === 0) return;
 
@@ -191,7 +200,31 @@ async function injectDynamicContent() {
                         beliefsContainer.innerHTML = '<p>Error loading beliefs content.</p>';
                         console.error('Error parsing beliefs_json:', e);
                     }
-                    continue; // Done with beliefs page
+                }
+
+                // --- Handle staff_json: build grid dynamically ---
+                if (pageName === 'staff' && staffContainer && contentData['staff_json']) {
+                    try {
+                        const staffList = JSON.parse(contentData['staff_json']);
+                        staffContainer.innerHTML = '';
+                        staffList.forEach(staff => {
+                            const card = document.createElement('div');
+                            card.className = 'staff-member-card';
+                            card.innerHTML = `
+                                <div class="staff-photo-wrapper">
+                                    <img src="${staff.image || './images/pastor.png'}" alt="${staff.name}" class="staff-photo">
+                                </div>
+                                <div class="staff-info">
+                                    <h3 class="staff-name">${staff.name}</h3>
+                                    <p class="staff-role">${staff.role}</p>
+                                </div>
+                            `;
+                            staffContainer.appendChild(card);
+                        });
+                    } catch(e) {
+                        staffContainer.innerHTML = '<p>Error loading staff content.</p>';
+                        console.error('Error parsing staff_json:', e);
+                    }
                 }
 
                 // --- Inject standard content and background images ---
@@ -209,6 +242,9 @@ async function injectDynamicContent() {
                         // Handle Standard Content
                         if (el.hasAttribute('data-content-id')) {
                             const key = el.getAttribute('data-content-id');
+                            // Skip JSON lists from standard injection
+                            if (key.endsWith('_json')) return;
+
                             if (contentData[key] !== undefined) {
                                 if (el.tagName.toLowerCase() === 'img') {
                                     el.src = contentData[key];

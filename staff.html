@@ -13,6 +13,72 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .staff-member-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .staff-member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-blue);
+        }
+
+        .staff-photo-wrapper {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            background-color: #f0f8ff;
+        }
+
+        .staff-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .staff-member-card:hover .staff-photo {
+            transform: scale(1.05);
+        }
+
+        .staff-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .staff-name {
+            color: var(--primary-dark);
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .staff-role {
+            color: var(--primary-blue);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 
 <body>
@@ -58,9 +124,14 @@
                         </div>
                     </div>
                 </section>
-                <section class="schedules">
-                    <h2>Meet Our Staff</h2>
-                    <p>Information about the church staff will appear here.</p>
+                <section class="schedules" data-page="staff">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2rem;">
+                        <h2 data-page="staff" data-content-id="staff_welcome_title">Meet Our Staff</h2>
+                    </div>
+                    <div id="staff-container" class="staff-grid" data-page="staff" data-content-id="staff_json" data-content-type="json">
+                        <!-- Staff cards will be injected here -->
+                        <p>Loading staff...</p>
+                    </div>
                 </section>
             </main>
             <aside class="sidebar">

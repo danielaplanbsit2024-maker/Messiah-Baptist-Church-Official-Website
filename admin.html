@@ -285,6 +285,8 @@
                 <li><a data-target="panel-home" class="active">Home Page</a></li>
                 <li><a data-target="panel-beliefs">Beliefs Page</a></li>
                 <li><a data-target="panel-global">Global Elements</a></li>
+                <li><a data-target="panel-pastor">Our Pastor Page</a></li>
+                <li><a data-target="panel-staff">Our Staff Page</a></li>
                 <li><a data-target="panel-missionaries">Missionaries Page</a></li>
             </ul>
             <h3 style="margin-top: 30px;">Manage Data</h3>
@@ -392,9 +394,65 @@
                 </form>
             </div>
 
+            <div id="panel-staff" class="section-panel">
+                <h2>Edit Our Staff Page</h2>
+                <form id="form-staff" data-page="staff">
+                    <div class="form-group">
+                        <label>Welcome Title</label>
+                        <input type="text" name="staff_welcome_title">
+                    </div>
+                    <div class="section-divider">Staff Members</div>
+                    <div class="list-editor" id="staff-editor">
+                        <!-- Rows injected by JS -->
+                    </div>
+                    <button type="button" class="btn-add" onclick="addStaffRow()">+ Add Staff Member</button>
+                    <!-- Hidden field to store JSON -->
+                    <input type="hidden" name="staff_json" id="staff_json_input">
+                    
+                    <button type="submit" class="btn-primary" style="margin-top: 20px; width: 100%;">Save Staff Content</button>
+                </form>
+            </div>
+
             <div id="panel-missionaries" class="section-panel">
                 <h2>Edit Missionaries Page</h2>
                 <p>Coming soon...</p>
+            </div>
+
+            <!-- Panel: Our Pastor Page -->
+            <div id="panel-pastor" class="section-panel">
+                <h2>Edit Our Pastor Page</h2>
+                <form id="form-pastor" data-page="pastor">
+                    <div class="form-group">
+                        <label>Pastor Image (Syncs with Home)</label>
+                        <input type="hidden" id="pastor_page_image_input" name="pastor_image">
+                        <input type="file" id="pastor_page_image_file" accept="image/*" class="file-upload-input">
+                        <div class="image-preview-box" id="pastor_page_image_preview" style="width: 200px; height: 200px; border-radius: 50%;">No Image</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Welcome Title</label>
+                        <input type="text" name="pastor_welcome_title">
+                    </div>
+                    <div class="form-group">
+                        <label>Pastor Message</label>
+                        <input type="hidden" name="pastor_message" id="input_pastor_page_message">
+                        <div id="editor_pastor_page_message" style="height: 300px; background: white; color: black; border-radius: 4px;"></div>
+                    </div>
+                    <div class="section-divider">Signature Details</div>
+                    <div class="form-group">
+                        <label>Signature Name</label>
+                        <input type="text" name="pastor_signature_name">
+                    </div>
+                    <div class="form-group">
+                        <label>Signature Role</label>
+                        <input type="text" name="pastor_signature_role">
+                    </div>
+                    <div class="form-group">
+                        <label>Signature Church</label>
+                        <input type="text" name="pastor_signature_church">
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="margin-top: 20px; width: 100%;">Save Pastor Content</button>
+                </form>
             </div>
 
             <!-- Bible Studies Editor -->

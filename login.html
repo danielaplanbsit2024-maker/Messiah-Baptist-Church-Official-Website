@@ -134,9 +134,16 @@
     </div>
 
     <script>
-        const API_URL = window.location.protocol === 'file:'
-            ? 'http://localhost:3002/api'
-            : '/api';
+        const API_URL = (() => {
+            const { hostname, port, protocol } = window.location;
+            if (protocol === 'file:') {
+                return 'http://localhost:3002/api';
+            }
+            if ((hostname === 'localhost' || hostname === '127.0.0.1') && port !== '3002') {
+                return `http://${hostname}:3002/api`;
+            }
+            return '/api';
+        })();
 
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();

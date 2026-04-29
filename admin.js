@@ -1,7 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const API_URL = window.location.protocol === 'file:'
-        ? 'http://localhost:3002/api'
-        : '/api';
+    const API_URL = (() => {
+        const { hostname, port, protocol } = window.location;
+        if (protocol === 'file:') {
+            return 'http://localhost:3002/api';
+        }
+        if ((hostname === 'localhost' || hostname === '127.0.0.1') && port !== '3002') {
+            return `http://${hostname}:3002/api`;
+        }
+        return '/api';
+    })();
 
     function apiFetch(path, options = {}) {
         return fetch(`${API_URL}${path}`, {
@@ -45,6 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
         quillInstances['pastor_quote'] = new Quill('#editor_pastor_quote', { theme: 'snow', modules: { toolbar: toolbarOptions } });
         quillInstances['pastor_quote'].on('text-change', () => {
             document.getElementById('input_pastor_quote').value = quillInstances['pastor_quote'].root.innerHTML;
+        });
+    }
+
+    // Initialize Pastor Page Message editor
+    if (document.querySelector('#editor_pastor_page_message')) {
+        quillInstances['pastor_message'] = new Quill('#editor_pastor_page_message', { theme: 'snow', modules: { toolbar: toolbarOptions } });
+        quillInstances['pastor_message'].on('text-change', () => {
+            document.getElementById('input_pastor_page_message').value = quillInstances['pastor_message'].root.innerHTML;
         });
     }
 
@@ -107,6 +122,19 @@ document.addEventListener('DOMContentLoaded', () => {
         return JSON.stringify(beliefsArray);
     }
 
+    function serializeStaff() {
+        const rows = document.querySelectorAll('#staff-editor .list-row');
+        const staffList = [];
+        rows.forEach(row => {
+            staffList.push({
+                name: row.querySelector('.staff-name').value,
+                role: row.querySelector('.staff-role').value,
+                image: row.querySelector('.staff-image-input').value
+            });
+        });
+        return JSON.stringify(staffList);
+    }
+
     // --- TAB NAVIGATION LOGIC ---
     const navLinks = document.querySelectorAll('.admin-sidebar a');
     const panels = document.querySelectorAll('.section-panel');
@@ -132,10 +160,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await apiFetch('/upload', { method: 'POST', body: formData });
             if (response.ok) {
                 const data = await response.json();
-                document.getElementById(hiddenInputId).value = data.url; // Save path
+                const inputEl = document.getElementById(hiddenInputId);
+                if (inputEl) inputEl.value = data.url;
                 const preview = document.getElementById(previewId);
-                preview.style.backgroundImage = `url(${data.url})`;
-                preview.textContent = '';
+                if (preview) {
+                    preview.style.backgroundImage = `url(${data.url})`;
+                    preview.textContent = '';
+                }
+                
+                // --- Sync Pastor Images specifically ---
+                if (hiddenInputId === 'pastor_image_input' || hiddenInputId === 'pastor_page_image_input') {
+                    const p1 = document.getElementById('pastor_image_input');
+                    const p2 = document.getElementById('pastor_page_image_input');
+                    if (p1) p1.value = data.url;
+                    if (p2) p2.value = data.url;
+                    
+                    const v1 = document.getElementById('pastor_image_preview');
+                    const v2 = document.getElementById('pastor_page_image_preview');
+                    if (v1) { v1.style.backgroundImage = `url(${data.url})`; v1.textContent = ''; }
+                    if (v2) { v2.style.backgroundImage = `url(${data.url})`; v2.textContent = ''; }
+                }
             } else {
                 alert('File upload failed.');
             }
@@ -146,7 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('hero_image_file').addEventListener('change', (e) => handleFileUpload(e.target, 'hero_image_input', 'hero_image_preview'));
     document.getElementById('pastor_image_file').addEventListener('change', (e) => handleFileUpload(e.target, 'pastor_image_input', 'pastor_image_preview'));
-
+    const pastorPageImgFile = document.getElementById('pastor_page_image_file');
+    if (pastorPageImgFile) pastorPageImgFile.addEventListener('change', (e) => handleFileUpload(e.target, 'pastor_page_image_input', 'pastor_page_image_preview'));
 
     // --- DYNAMIC LIST LOGIC (Schedules & Cards) ---
     window.addScheduleRow = function(day = '', time = '') {
@@ -173,6 +218,40 @@ document.addEventListener('DOMContentLoaded', () => {
             <button type="button" class="btn-delete" onclick="this.parentElement.remove()">X</button>
         `;
         container.appendChild(row);
+    };
+
+    window.addStaffRow = function(name = '', role = '', image = '') {
+        const container = document.getElementById('staff-editor');
+        const uniqueId = Date.now() + Math.floor(Math.random() * 1000);
+        const row = document.createElement('div');
+        row.className = 'list-row';
+        row.style.alignItems = 'flex-start';
+        row.innerHTML = `
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
+                <input type="text" placeholder="Name" value="${name}" class="staff-name">
+                <input type="text" placeholder="Role" value="${role}" class="staff-role">
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
+                <input type="hidden" class="staff-image-input" value="${image}">
+                <input type="file" id="file_${uniqueId}" accept="image/*" class="file-upload-input" style="font-size: 0.8rem; padding: 5px;">
+                <div class="image-preview-box" id="preview_${uniqueId}" style="width: 60px; height: 60px; border-radius: 50%; background-image: url('${image}'); background-size: cover; background-position: center; border: 1px solid #ccc;"></div>
+            </div>
+            <button type="button" class="btn-delete" onclick="this.parentElement.remove()">X</button>
+        `;
+        container.appendChild(row);
+
+        document.getElementById(`file_${uniqueId}`).addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('image', file);
+            apiFetch('/upload', { method: 'POST', body: formData })
+                .then(r => r.json())
+                .then(data => {
+                    row.querySelector('.staff-image-input').value = data.url;
+                    document.getElementById(`preview_${uniqueId}`).style.backgroundImage = `url(${data.url})`;
+                }).catch(err => alert("Upload failed"));
+        });
     };
 
     function serializeLists() {
@@ -237,8 +316,15 @@ document.addEventListener('DOMContentLoaded', () => {
                                 document.getElementById('hero_image_preview').textContent = '';
                             }
                             if (key === 'pastor_image' && value) {
-                                document.getElementById('pastor_image_preview').style.backgroundImage = `url(${value})`;
-                                document.getElementById('pastor_image_preview').textContent = '';
+                                const p1 = document.getElementById('pastor_image_input');
+                                const p2 = document.getElementById('pastor_page_image_input');
+                                if (p1) p1.value = value;
+                                if (p2) p2.value = value;
+                                
+                                const v1 = document.getElementById('pastor_image_preview');
+                                const v2 = document.getElementById('pastor_page_image_preview');
+                                if (v1) { v1.style.backgroundImage = `url(${value})`; v1.textContent = ''; }
+                                if (v2) { v2.style.backgroundImage = `url(${value})`; v2.textContent = ''; }
                             }
 
                             // Specific handler for JSON lists
@@ -251,6 +337,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const msgs = JSON.parse(value);
                                 document.getElementById('messages-editor').innerHTML = ''; // Clear
                                 msgs.forEach(m => window.addMessageRow(m.icon, m.title, m.subtext, m.link));
+                            }
+                            if (key === 'staff_json' && value) {
+                                const list = JSON.parse(value);
+                                document.getElementById('staff-editor').innerHTML = ''; // Clear
+                                list.forEach(s => window.addStaffRow(s.name, s.role, s.image));
                             }
                         }
                     }
@@ -274,6 +365,11 @@ document.addEventListener('DOMContentLoaded', () => {
             let updates = {};
             if (pageName === 'beliefs') {
                 updates = { beliefs_json: serializeBeliefs() };
+            } else if (pageName === 'staff') {
+                updates = { 
+                    staff_json: serializeStaff(),
+                    staff_welcome_title: form.querySelector('input[name="staff_welcome_title"]').value 
+                };
             } else {
                 const formData = new FormData(form);
                 for (let [key, value] of formData.entries()) {
@@ -289,6 +385,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 
                 if (response.ok) {
+                    // Sync to home if saving pastor image from another tab
+                    if (updates.pastor_image && pageName !== 'home') {
+                        apiFetch('/content/home', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ pastor_image: updates.pastor_image })
+                        }).catch(e => console.error(e));
+                    }
+
                     const btn = form.querySelector('button[type="submit"]');
                     const originalText = btn.textContent;
                     btn.textContent = '✔ Saved Successfully!';
@@ -302,6 +407,8 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPageContent('home');
     loadPageContent('global');
     loadPageContent('beliefs');
+    loadPageContent('pastor');
+    loadPageContent('staff');
 
     // --- LOGOUT ---
     const logoutBtn = document.getElementById('btn-logout');

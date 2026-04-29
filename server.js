@@ -35,6 +35,10 @@ const assetFiles = new Set(['style.css', 'main.js', 'admin.js']);
 const app = express();
 const port = process.env.PORT || 3002;
 const allowedOrigins = new Set([
+  'http://localhost:3002',
+  'http://127.0.0.1:3002',
+  'http://localhost:5500',
+  'http://127.0.0.1:5500',
   'http://localhost:5173',
   'http://127.0.0.1:5173',
   'http://localhost:4173',
@@ -222,13 +226,17 @@ async function ensureDatabaseReady() {
   await syncFallbackData();
 }
 
+app.get('/api/ping', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 app.post('/api/upload', upload.single('image'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
 
-  const fullUrl = `http://localhost:${port}/uploads/${req.file.filename}`;
-  res.json({ url: fullUrl });
+  const relativeUrl = `/uploads/${req.file.filename}`;
+  res.json({ url: relativeUrl });
 });
 
 app.post('/api/auth/login', (req, res) => {
@@ -361,7 +369,7 @@ app.get('/api/content/:page_name', (req, res) => {
   });
 });
 
-app.post('/api/content/:page_name', requireAuth, (req, res) => {
+app.post('/api/content/:page_name', requireAuth, async (req, res) => {
   const pageName = req.params.page_name;
   const updates = req.body;
 
@@ -369,37 +377,66 @@ app.post('/api/content/:page_name', requireAuth, (req, res) => {
     return res.status(400).json({ error: 'Invalid update data' });
   }
 
-  db.serialize(() => {
-    const stmt = db.prepare(
-      'INSERT OR REPLACE INTO page_content (id, page_name, content_key, content_value) VALUES ((SELECT id FROM page_content WHERE page_name = ? AND content_key = ?), ?, ?, ?)'
-    );
-
-    for (const [key, value] of Object.entries(updates)) {
-      stmt.run(pageName, key, pageName, key, value);
+  try {
+    const keys = Object.keys(updates);
+    if (keys.length === 0) {
+      return res.json({ message: 'No content to update' });
     }
 
-    stmt.finalize((err) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-      } else {
-        res.json({ message: 'Content updated successfully' });
-      }
-    });
-  });
+    // Use a transaction for atomic updates
+    await runStatement(db, 'BEGIN TRANSACTION');
+
+    for (const [key, value] of Object.entries(updates)) {
+      // Modern SQLite INSERT OR REPLACE handles UNIQUE constraints by deleting old and inserting new
+      // We use page_name and content_key as the uniqueness criteria
+      await runStatement(
+        db,
+        'INSERT OR REPLACE INTO page_content (page_name, content_key, content_value) VALUES (?, ?, ?)',
+        [pageName, key, value]
+      );
+    }
+
+    await runStatement(db, 'COMMIT');
+    res.json({ message: 'Content updated successfully' });
+  } catch (err) {
+    console.error('Save error:', err);
+    try {
+      await runStatement(db, 'ROLLBACK');
+    } catch (rollbackErr) {
+      console.error('Rollback failed:', rollbackErr);
+    }
+    res.status(500).json({ error: 'Failed to save content: ' + err.message });
+  }
 });
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/:fileName', (req, res, next) => {
-  const { fileName } = req.params;
-  if (!htmlPages.has(fileName) && !assetFiles.has(fileName)) {
+// Serve static pages with and without .html extension
+app.get('/:page', (req, res, next) => {
+  const page = req.params.page;
+  
+  // Skip API routes
+  if (page === 'api') {
     next();
     return;
   }
 
-  res.sendFile(path.join(__dirname, fileName));
+  // Check if it's an asset file
+  if (assetFiles.has(page)) {
+    res.sendFile(path.join(__dirname, page));
+    return;
+  }
+
+  // Check for .html version
+  const htmlFile = page.endsWith('.html') ? page : `${page}.html`;
+  if (htmlPages.has(htmlFile)) {
+    res.sendFile(path.join(__dirname, htmlFile));
+    return;
+  }
+
+  next();
 });
 
 ensureDatabaseReady()
