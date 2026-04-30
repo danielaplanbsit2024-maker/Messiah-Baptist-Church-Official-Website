@@ -18,123 +18,185 @@
             padding: 2rem 0;
         }
 
-        .pastor-grid {
-            display: grid;
-            grid-template-columns: 350px 1fr;
+        .pastor-card-unified {
+            display: flex;
             gap: 4rem;
-            align-items: start;
+            align-items: flex-start;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .pastor-left-column {
+            flex: 0 0 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
         }
 
         .pastor-image-wrapper {
-            position: relative;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            border: 8px solid var(--white);
-            background: var(--white);
-            margin-top: -80px; /* Slight overlap effect with hero */
-            z-index: 10;
+            width: 350px;
+            height: 350px;
+            margin: 0;
+            padding: 0;
+            background: transparent;
         }
 
         .pastor-image-wrapper img {
             width: 100%;
-            height: auto;
+            height: 100%;
             display: block;
             object-fit: cover;
-            border-radius: calc(var(--radius) - 4px);
+            object-position: center top;
+            border-radius: 50%;
+            /* Modernized 'Halo' Border */
+            border: 6px solid var(--white);
+            box-shadow: 0 0 0 2px var(--primary-blue), 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+
+        .pastor-image-wrapper img:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 0 0 2px var(--accent-gold), 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
         .pastor-text-content {
-            background: var(--white);
-            padding: 3.5rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-            position: relative;
-            z-index: 5;
+            flex: 1; /* Takes up all remaining space, forming a clean vertical line */
+            padding: 0;
         }
 
         .pastor-title {
             color: var(--primary-dark);
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
+            font-family: var(--font-heading); /* Upgraded to premium font */
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
             position: relative;
-            padding-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .pastor-title::after {
+            /* Elegant gold accent line */
             content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
+            display: block;
             width: 60px;
             height: 3px;
-            background-color: var(--primary-blue);
+            background-color: var(--accent-gold);
+            margin-top: 0.8rem;
             border-radius: 2px;
         }
 
         .pastor-message-body p {
             margin-bottom: 1.5rem;
-            line-height: 1.8;
+            line-height: 1.8; /* Increased for better readability */
             color: var(--text-color);
             font-size: 1.05rem;
         }
 
-        /* Drop cap for first paragraph */
+        /* Subtle lead-in for the first sentence */
+        .pastor-message-body p:first-of-type {
+            font-size: 1.15rem;
+            color: var(--primary-dark);
+            font-weight: 500;
+        }
+
+        /* Remove the drop cap */
         .pastor-message-body p:first-of-type::first-letter {
-            float: left;
-            font-size: 3.5rem;
-            line-height: 1;
-            font-family: var(--font-heading);
-            color: var(--primary-blue);
-            margin-right: 0.5rem;
-            margin-top: -0.2rem;
+            float: none;
+            font-size: inherit;
+            line-height: inherit;
+            font-family: inherit;
+            color: inherit;
+            margin: 0;
         }
 
         .signature {
-            margin-top: 3rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 2rem;
+            margin-top: 4rem;
+            border-top: none;
+            padding-top: 0.5rem;
+            padding-left: 1.5rem;
+            clear: both; 
+            position: relative;
+        }
+        
+        .signature::before {
+            /* Elegant vertical accent line anchoring the signature */
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-blue), transparent);
+            border-radius: 4px;
+        }
+        
+        .signature p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
         .signature-name {
             font-family: var(--font-heading);
-            font-size: 2rem;
+            font-size: 1.8rem;
+            font-weight: 700;
             color: var(--primary-dark);
             font-style: italic;
-            margin: 0.5rem 0;
+            display: inline;
         }
 
         .signature-role {
             color: var(--primary-blue);
             font-weight: 600;
+            font-size: 0.95rem;
             text-transform: uppercase;
-            font-size: 0.9rem;
             letter-spacing: 1px;
+            display: inline;
+        }
+        
+        .signature-role::before {
+            content: ", ";
+            color: var(--primary-dark);
+            font-weight: normal;
         }
 
         .signature-church {
-            font-style: italic;
+            font-style: normal;
             color: var(--text-light);
             font-size: 0.9rem;
             margin-top: 0.25rem;
+            margin-left: 0;
+            display: block; /* Force church to new line */
         }
 
         @media (max-width: 992px) {
-            .pastor-grid {
-                grid-template-columns: 1fr;
+            .pastor-card-unified {
+                flex-direction: column;
+                align-items: center;
                 gap: 2rem;
             }
-            
-            .pastor-image-wrapper {
+            .pastor-left-column {
+                flex: 0 0 auto;
+                width: 100%;
                 max-width: 400px;
-                margin: 0 auto;
-                margin-top: -40px;
+                gap: 2rem;
             }
-            
-            .pastor-text-content {
-                padding: 2rem;
+            .pastor-image-wrapper {
+                width: 280px;
+                height: 280px;
+                margin: 0 auto;
+            }
+            .signature {
+                padding-left: 0;
+                text-align: center;
+            }
+            .signature-church {
+                margin-left: 0;
             }
         }
     </style>
@@ -157,25 +219,45 @@
                 </div>
             </div>
         </header>
-        <nav id="main-nav" class="main-nav">
+                <nav id="main-nav" class="main-nav">
             <div class="container">
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="beliefs.html">Beliefs</a></li>
-                    <li><a href="pastor.html" class="active">Our Pastor</a></li>
-                    <li><a href="staff.html">Our Staff</a></li>
-                    <li><a href="ministries.html">Ministries</a></li>
-                    <li><a href="missionaries.html">Missionaries</a></li>
-                    <li><a href="sermons.html">Sermon Outlines</a></li>
-                    <li><a href="bible-studies.html">Bible Studies</a></li>
-                    <li><a href="institute.html">Bible Institute</a></li>
-                    <li><a href="saved.html">How to be Saved</a></li>
-                    <li><a href="gallery.html">Photo Gallery</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li class="dropdown">
+                        <a href="#">About Us <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="beliefs.html">Beliefs</a></li>
+                            <li><a href="pastor.html">Our Pastor</a></li>
+                            <li><a href="staff.html">Our Staff</a></li>
+                            <li><a href="gallery.html">Photo Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Ministries <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="ministries.html">Ministries</a></li>
+                            <li><a href="missionaries.html">Missionaries</a></li>
+                            <li><a href="institute.html">Bible Institute</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Resources <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sermons.html">Sermon Outlines</a></li>
+                            <li><a href="bible-studies.html">Bible Studies</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Connect <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="saved.html">How to be Saved</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>
-        <div class="main-layout container">
+        <div class="container" style="padding: 3rem 0;">
             <main class="content-area">
                 <section class="hero" style="height: 200px;">
                     <div class="hero-image-placeholder" style="height: 100%;">
@@ -186,10 +268,18 @@
                 </section>
 
                 <section class="pastor-grid-section">
-                    <div class="pastor-grid">
-                        <div class="pastor-image-wrapper">
-                            <!-- We sync the image with the home page by using data-page="home" and data-content-id="pastor_image" -->
-                            <img src="./images/pastor.png" alt="Pastor" class="pastor-portrait" data-page="home" data-content-id="pastor_image">
+                    <div class="pastor-card-unified">
+                        <div class="pastor-left-column">
+                            <div class="pastor-image-wrapper">
+                                <!-- We sync the image with the home page by using data-page="home" and data-content-id="pastor_image" -->
+                                <img src="./images/pastor.png" alt="Pastor" class="pastor-portrait" data-page="home" data-content-id="pastor_image">
+                            </div>
+                            <div class="sidebar-card">
+                                <h3>Get in Touch</h3>
+                                <p><strong>Address:</strong></p>
+                                <p class="small-text">145 Rivera St., Baesa Rd.<br>Caloocan City, Philippines</p>
+                                <a href="contact.html" class="btn-outline">Contact Us</a>
+                            </div>
                         </div>
                         <div class="pastor-text-content">
                             <h2 class="pastor-title" data-page="pastor" data-content-id="pastor_welcome_title">Welcome to Messiah Baptist Church</h2>
@@ -224,15 +314,6 @@
                     </div>
                 </section>
             </main>
-
-            <aside class="sidebar">
-                <div class="sidebar-card">
-                    <h3>Get in Touch</h3>
-                    <p><strong>Address:</strong></p>
-                    <p class="small-text">145 Rivera St., Baesa Rd.<br>Caloocan City, Philippines</p>
-                    <a href="contact.html" class="btn-outline">Contact Us</a>
-                </div>
-            </aside>
         </div>
                 <!-- Footer -->
         <footer class="site-footer">
