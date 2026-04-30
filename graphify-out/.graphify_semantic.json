@@ -1,0 +1,29 @@
+{
+  "nodes": [
+    {"id": "server_express", "label": "Express Server", "file_type": "code", "source_file": "server.js"},
+    {"id": "server_db", "label": "SQLite Database", "file_type": "code", "source_file": "server.js"},
+    {"id": "server_auth", "label": "Auth Middleware", "file_type": "code", "source_file": "server.js"},
+    {"id": "init_db_script", "label": "DB Initializer", "file_type": "code", "source_file": "init-db.js"},
+    {"id": "admin_logic", "label": "Admin Dashboard Logic", "file_type": "code", "source_file": "admin.js"},
+    {"id": "main_logic", "label": "Main Website Logic", "file_type": "code", "source_file": "main.js"},
+    {"id": "page_content_table", "label": "Page Content Table", "file_type": "code", "source_file": "server.js"},
+    {"id": "bible_studies_table", "label": "Bible Studies Table", "file_type": "code", "source_file": "server.js"},
+    {"id": "index_page", "label": "Home Page", "file_type": "document", "source_file": "index.html"},
+    {"id": "admin_page", "label": "Admin Dashboard", "file_type": "document", "source_file": "admin.html"},
+    {"id": "login_page", "label": "Login Page", "file_type": "document", "source_file": "login.html"}
+  ],
+  "edges": [
+    {"source": "server_express", "target": "server_db", "relation": "reads_writes", "confidence": "EXTRACTED", "confidence_score": 1.0},
+    {"source": "server_express", "target": "server_auth", "relation": "uses", "confidence": "EXTRACTED", "confidence_score": 1.0},
+    {"source": "admin_logic", "target": "server_express", "relation": "api_requests", "confidence": "INFERRED", "confidence_score": 0.9},
+    {"source": "main_logic", "target": "server_express", "relation": "api_requests", "confidence": "INFERRED", "confidence_score": 0.9},
+    {"source": "init_db_script", "target": "server_db", "relation": "initializes", "confidence": "EXTRACTED", "confidence_score": 1.0},
+    {"source": "admin_page", "target": "admin_logic", "relation": "includes", "confidence": "EXTRACTED", "confidence_score": 1.0},
+    {"source": "index_page", "target": "main_logic", "relation": "includes", "confidence": "EXTRACTED", "confidence_score": 1.0},
+    {"source": "server_db", "target": "page_content_table", "relation": "contains", "confidence": "EXTRACTED", "confidence_score": 1.0},
+    {"source": "server_db", "target": "bible_studies_table", "relation": "contains", "confidence": "EXTRACTED", "confidence_score": 1.0}
+  ],
+  "hyperedges": [],
+  "input_tokens": 5000,
+  "output_tokens": 1000
+}

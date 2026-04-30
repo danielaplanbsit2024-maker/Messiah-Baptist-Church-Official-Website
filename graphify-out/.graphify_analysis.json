@@ -1,0 +1,200 @@
+{
+  "communities": {
+    "0": [
+      "admin_logic",
+      "admin_page",
+      "bible_studies_table",
+      "index_page",
+      "init_db_script",
+      "main_logic",
+      "page_content_table",
+      "server_auth",
+      "server_db",
+      "server_express"
+    ],
+    "1": [
+      "admin_js",
+      "new_website1_admin_apifetch",
+      "new_website1_admin_checkauth",
+      "new_website1_admin_fetchstudies",
+      "new_website1_admin_handlefileupload",
+      "new_website1_admin_loadpagecontent",
+      "new_website1_admin_serializebeliefs",
+      "new_website1_admin_serializelists",
+      "new_website1_admin_serializestaff"
+    ],
+    "2": [
+      "main_js",
+      "new_website1_main_applyglobalfallbacks",
+      "new_website1_main_applyhomefallbacks",
+      "new_website1_main_closemenu",
+      "new_website1_main_fetchbiblestudies",
+      "new_website1_main_highlightactivemenuitem",
+      "new_website1_main_injectdynamiccontent",
+      "new_website1_main_openmenu",
+      "new_website1_main_updatetime"
+    ],
+    "3": [
+      "new_website1_server_closedatabase",
+      "new_website1_server_ensuredatabaseready",
+      "new_website1_server_getrows",
+      "new_website1_server_origin",
+      "new_website1_server_requireauth",
+      "new_website1_server_runstatement",
+      "new_website1_server_syncfallbackdata",
+      "server_js"
+    ],
+    "4": [
+      "scratch_test_deps_js",
+      "scratch_test_deps_test"
+    ],
+    "5": [
+      "init_db_js"
+    ],
+    "6": [
+      "vite_config_js"
+    ],
+    "7": [
+      "scratch_check_db_v2_js"
+    ],
+    "8": [
+      "scratch_check_db_js"
+    ],
+    "9": [
+      "login_page"
+    ]
+  },
+  "cohesion": {
+    "0": 0.2,
+    "1": 0.33,
+    "2": 0.28,
+    "3": 0.43,
+    "4": 1.0,
+    "5": 1.0,
+    "6": 1.0,
+    "7": 1.0,
+    "8": 1.0,
+    "9": 1.0
+  },
+  "gods": [
+    {
+      "id": "new_website1_admin_apifetch",
+      "label": "apiFetch()",
+      "degree": 5
+    },
+    {
+      "id": "new_website1_server_syncfallbackdata",
+      "label": "syncFallbackData()",
+      "degree": 5
+    },
+    {
+      "id": "server_express",
+      "label": "Express Server",
+      "degree": 4
+    },
+    {
+      "id": "server_db",
+      "label": "SQLite Database",
+      "degree": 4
+    },
+    {
+      "id": "new_website1_main_injectdynamiccontent",
+      "label": "injectDynamicContent()",
+      "degree": 3
+    },
+    {
+      "id": "new_website1_server_runstatement",
+      "label": "runStatement()",
+      "degree": 3
+    },
+    {
+      "id": "new_website1_server_ensuredatabaseready",
+      "label": "ensureDatabaseReady()",
+      "degree": 3
+    },
+    {
+      "id": "new_website1_admin_checkauth",
+      "label": "checkAuth()",
+      "degree": 2
+    },
+    {
+      "id": "new_website1_admin_handlefileupload",
+      "label": "handleFileUpload()",
+      "degree": 2
+    },
+    {
+      "id": "new_website1_admin_loadpagecontent",
+      "label": "loadPageContent()",
+      "degree": 2
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Admin Dashboard",
+      "target": "Admin Dashboard Logic",
+      "source_files": [
+        "admin.html",
+        "admin.js"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "includes",
+      "why": "crosses file types (code \u2194 doc); connects across different repos/directories"
+    },
+    {
+      "source": "Home Page",
+      "target": "Main Website Logic",
+      "source_files": [
+        "index.html",
+        "main.js"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "includes",
+      "why": "crosses file types (code \u2194 doc); connects across different repos/directories"
+    },
+    {
+      "source": "Admin Dashboard Logic",
+      "target": "Express Server",
+      "source_files": [
+        "admin.js",
+        "server.js"
+      ],
+      "confidence": "INFERRED",
+      "relation": "api_requests",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    },
+    {
+      "source": "Main Website Logic",
+      "target": "Express Server",
+      "source_files": [
+        "main.js",
+        "server.js"
+      ],
+      "confidence": "INFERRED",
+      "relation": "api_requests",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    },
+    {
+      "source": "DB Initializer",
+      "target": "SQLite Database",
+      "source_files": [
+        "init-db.js",
+        "server.js"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "initializes",
+      "why": "connects across different repos/directories"
+    }
+  ],
+  "questions": [
+    {
+      "type": "verify_inferred",
+      "question": "Are the 2 inferred relationships involving `Express Server` (e.g. with `Admin Dashboard Logic` and `Main Website Logic`) actually correct?",
+      "why": "`Express Server` has 2 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `Auth Middleware`, `DB Initializer`, `Page Content Table` to the rest of the system?",
+      "why": "7 weakly-connected nodes found - possible documentation gaps or missing edges."
+    }
+  ]
+}

@@ -10,12 +10,73 @@ const API_URL = (() => {
     return '/api';
 })();
 
+// =============================================
+// Mobile Hamburger Menu
+// =============================================
 const menuToggle = document.getElementById('menu-toggle');
+const hamburgerIcon = document.getElementById('hamburger-icon');
 const mainNav = document.getElementById('main-nav');
 
+function openMenu() {
+    mainNav.classList.add('open');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    if (hamburgerIcon) {
+        hamburgerIcon.classList.remove('fa-bars');
+        hamburgerIcon.classList.add('fa-xmark');
+    }
+}
+
+function closeMenu() {
+    mainNav.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    if (hamburgerIcon) {
+        hamburgerIcon.classList.remove('fa-xmark');
+        hamburgerIcon.classList.add('fa-bars');
+    }
+}
+
 if (menuToggle && mainNav) {
-    menuToggle.addEventListener('click', () => {
-        mainNav.classList.toggle('active');
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mainNav.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    // Close when a nav link is clicked (navigate away)
+    mainNav.querySelectorAll('a:not([href="#"])').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) closeMenu();
+        });
+    });
+
+    // Handle dropdown toggles on mobile (click instead of hover)
+    mainNav.querySelectorAll('.dropdown > a').forEach(dropdownToggle => {
+        dropdownToggle.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                // On mobile, prevent navigation for '#' href dropdowns
+                const href = dropdownToggle.getAttribute('href');
+                if (!href || href === '#') {
+                    e.preventDefault();
+                }
+                const parentLi = dropdownToggle.parentElement;
+                parentLi.classList.toggle('open');
+            }
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (mainNav.classList.contains('open') && !mainNav.contains(e.target) && e.target !== menuToggle) {
+            closeMenu();
+        }
+    });
+
+    // Reset on resize back to desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            closeMenu();
+            // Also reset any open dropdowns on mobile
+            mainNav.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+        }
     });
 }
 

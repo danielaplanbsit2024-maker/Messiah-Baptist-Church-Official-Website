@@ -1,0 +1,887 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "admin.js",
+      "file_type": "code",
+      "source_file": "admin.js",
+      "source_location": "L1",
+      "id": "admin_js",
+      "community": 1,
+      "norm_label": "admin.js"
+    },
+    {
+      "label": "apiFetch()",
+      "file_type": "code",
+      "source_file": "admin.js",
+      "source_location": "L13",
+      "id": "new_website1_admin_apifetch",
+      "community": 1,
+      "norm_label": "apifetch()"
+    },
+    {
+      "label": "checkAuth()",
+      "file_type": "code",
+      "source_file": "admin.js",
+      "source_location": "L21",
+      "id": "new_website1_admin_checkauth",
+      "community": 1,
+      "norm_label": "checkauth()"
+    },
+    {
+      "label": "serializeBeliefs()",
+      "file_type": "code",
+      "source_file": "admin.js",
+      "source_location": "L113",
+      "id": "new_website1_admin_serializebeliefs",
+      "community": 1,
+      "norm_label": "serializebeliefs()"
+    },
+    {
+      "label": "serializeStaff()",
+      "file_type": "code",
+      "source_file": "admin.js",
+      "source_location": "L125",
+      "id": "new_website1_admin_serializestaff",
+      "community": 1,
+      "norm_label": "serializestaff()"
+    },
+    {
+      "label": "handleFileUpload()",
+      "file_type": "code",
+      "source_file": "admin.js",
+      "source_location": "L153",
+      "id": "new_website1_admin_handlefileupload",
+      "community": 1,
+      "norm_label": "handlefileupload()"
+    },
+    {
+      "label": "serializeLists()",
+      "file_type": "code",
+      "source_file": "admin.js",
+      "source_location": "L257",
+      "id": "new_website1_admin_serializelists",
+      "community": 1,
+      "norm_label": "serializelists()"
+    },
+    {
+      "label": "loadPageContent()",
+      "file_type": "code",
+      "source_file": "admin.js",
+      "source_location": "L285",
+      "id": "new_website1_admin_loadpagecontent",
+      "community": 1,
+      "norm_label": "loadpagecontent()"
+    },
+    {
+      "label": "fetchStudies()",
+      "file_type": "code",
+      "source_file": "admin.js",
+      "source_location": "L425",
+      "id": "new_website1_admin_fetchstudies",
+      "community": 1,
+      "norm_label": "fetchstudies()"
+    },
+    {
+      "label": "init-db.js",
+      "file_type": "code",
+      "source_file": "init-db.js",
+      "source_location": "L1",
+      "id": "init_db_js",
+      "community": 5,
+      "norm_label": "init-db.js"
+    },
+    {
+      "label": "main.js",
+      "file_type": "code",
+      "source_file": "main.js",
+      "source_location": "L1",
+      "id": "main_js",
+      "community": 2,
+      "norm_label": "main.js"
+    },
+    {
+      "label": "openMenu()",
+      "file_type": "code",
+      "source_file": "main.js",
+      "source_location": "L20",
+      "id": "new_website1_main_openmenu",
+      "community": 2,
+      "norm_label": "openmenu()"
+    },
+    {
+      "label": "closeMenu()",
+      "file_type": "code",
+      "source_file": "main.js",
+      "source_location": "L29",
+      "id": "new_website1_main_closemenu",
+      "community": 2,
+      "norm_label": "closemenu()"
+    },
+    {
+      "label": "updateTime()",
+      "file_type": "code",
+      "source_file": "main.js",
+      "source_location": "L84",
+      "id": "new_website1_main_updatetime",
+      "community": 2,
+      "norm_label": "updatetime()"
+    },
+    {
+      "label": "highlightActiveMenuItem()",
+      "file_type": "code",
+      "source_file": "main.js",
+      "source_location": "L101",
+      "id": "new_website1_main_highlightactivemenuitem",
+      "community": 2,
+      "norm_label": "highlightactivemenuitem()"
+    },
+    {
+      "label": "applyGlobalFallbacks()",
+      "file_type": "code",
+      "source_file": "main.js",
+      "source_location": "L117",
+      "id": "new_website1_main_applyglobalfallbacks",
+      "community": 2,
+      "norm_label": "applyglobalfallbacks()"
+    },
+    {
+      "label": "applyHomeFallbacks()",
+      "file_type": "code",
+      "source_file": "main.js",
+      "source_location": "L134",
+      "id": "new_website1_main_applyhomefallbacks",
+      "community": 2,
+      "norm_label": "applyhomefallbacks()"
+    },
+    {
+      "label": "fetchBibleStudies()",
+      "file_type": "code",
+      "source_file": "main.js",
+      "source_location": "L169",
+      "id": "new_website1_main_fetchbiblestudies",
+      "community": 2,
+      "norm_label": "fetchbiblestudies()"
+    },
+    {
+      "label": "injectDynamicContent()",
+      "file_type": "code",
+      "source_file": "main.js",
+      "source_location": "L218",
+      "id": "new_website1_main_injectdynamiccontent",
+      "community": 2,
+      "norm_label": "injectdynamiccontent()"
+    },
+    {
+      "label": "server.js",
+      "file_type": "code",
+      "source_file": "server.js",
+      "source_location": "L1",
+      "id": "server_js",
+      "community": 3,
+      "norm_label": "server.js"
+    },
+    {
+      "label": "runStatement()",
+      "file_type": "code",
+      "source_file": "server.js",
+      "source_location": "L59",
+      "id": "new_website1_server_runstatement",
+      "community": 3,
+      "norm_label": "runstatement()"
+    },
+    {
+      "label": "getRows()",
+      "file_type": "code",
+      "source_file": "server.js",
+      "source_location": "L72",
+      "id": "new_website1_server_getrows",
+      "community": 3,
+      "norm_label": "getrows()"
+    },
+    {
+      "label": "closeDatabase()",
+      "file_type": "code",
+      "source_file": "server.js",
+      "source_location": "L85",
+      "id": "new_website1_server_closedatabase",
+      "community": 3,
+      "norm_label": "closedatabase()"
+    },
+    {
+      "label": "origin()",
+      "file_type": "code",
+      "source_file": "server.js",
+      "source_location": "L99",
+      "id": "new_website1_server_origin",
+      "community": 3,
+      "norm_label": "origin()"
+    },
+    {
+      "label": "requireAuth()",
+      "file_type": "code",
+      "source_file": "server.js",
+      "source_location": "L125",
+      "id": "new_website1_server_requireauth",
+      "community": 3,
+      "norm_label": "requireauth()"
+    },
+    {
+      "label": "syncFallbackData()",
+      "file_type": "code",
+      "source_file": "server.js",
+      "source_location": "L143",
+      "id": "new_website1_server_syncfallbackdata",
+      "community": 3,
+      "norm_label": "syncfallbackdata()"
+    },
+    {
+      "label": "ensureDatabaseReady()",
+      "file_type": "code",
+      "source_file": "server.js",
+      "source_location": "L192",
+      "id": "new_website1_server_ensuredatabaseready",
+      "community": 3,
+      "norm_label": "ensuredatabaseready()"
+    },
+    {
+      "label": "vite.config.js",
+      "file_type": "code",
+      "source_file": "vite.config.js",
+      "source_location": "L1",
+      "id": "vite_config_js",
+      "community": 6,
+      "norm_label": "vite.config.js"
+    },
+    {
+      "label": "check-db-v2.js",
+      "file_type": "code",
+      "source_file": "scratch\\check-db-v2.js",
+      "source_location": "L1",
+      "id": "scratch_check_db_v2_js",
+      "community": 7,
+      "norm_label": "check-db-v2.js"
+    },
+    {
+      "label": "check-db.js",
+      "file_type": "code",
+      "source_file": "scratch\\check-db.js",
+      "source_location": "L1",
+      "id": "scratch_check_db_js",
+      "community": 8,
+      "norm_label": "check-db.js"
+    },
+    {
+      "label": "test-deps.js",
+      "file_type": "code",
+      "source_file": "scratch\\test-deps.js",
+      "source_location": "L1",
+      "id": "scratch_test_deps_js",
+      "community": 4,
+      "norm_label": "test-deps.js"
+    },
+    {
+      "label": "test()",
+      "file_type": "code",
+      "source_file": "scratch\\test-deps.js",
+      "source_location": "L5",
+      "id": "scratch_test_deps_test",
+      "community": 4,
+      "norm_label": "test()"
+    },
+    {
+      "label": "Express Server",
+      "file_type": "code",
+      "source_file": "server.js",
+      "id": "server_express",
+      "community": 0,
+      "norm_label": "express server"
+    },
+    {
+      "label": "SQLite Database",
+      "file_type": "code",
+      "source_file": "server.js",
+      "id": "server_db",
+      "community": 0,
+      "norm_label": "sqlite database"
+    },
+    {
+      "label": "Auth Middleware",
+      "file_type": "code",
+      "source_file": "server.js",
+      "id": "server_auth",
+      "community": 0,
+      "norm_label": "auth middleware"
+    },
+    {
+      "label": "DB Initializer",
+      "file_type": "code",
+      "source_file": "init-db.js",
+      "id": "init_db_script",
+      "community": 0,
+      "norm_label": "db initializer"
+    },
+    {
+      "label": "Admin Dashboard Logic",
+      "file_type": "code",
+      "source_file": "admin.js",
+      "id": "admin_logic",
+      "community": 0,
+      "norm_label": "admin dashboard logic"
+    },
+    {
+      "label": "Main Website Logic",
+      "file_type": "code",
+      "source_file": "main.js",
+      "id": "main_logic",
+      "community": 0,
+      "norm_label": "main website logic"
+    },
+    {
+      "label": "Page Content Table",
+      "file_type": "code",
+      "source_file": "server.js",
+      "id": "page_content_table",
+      "community": 0,
+      "norm_label": "page content table"
+    },
+    {
+      "label": "Bible Studies Table",
+      "file_type": "code",
+      "source_file": "server.js",
+      "id": "bible_studies_table",
+      "community": 0,
+      "norm_label": "bible studies table"
+    },
+    {
+      "label": "Home Page",
+      "file_type": "document",
+      "source_file": "index.html",
+      "id": "index_page",
+      "community": 0,
+      "norm_label": "home page"
+    },
+    {
+      "label": "Admin Dashboard",
+      "file_type": "document",
+      "source_file": "admin.html",
+      "id": "admin_page",
+      "community": 0,
+      "norm_label": "admin dashboard"
+    },
+    {
+      "label": "Login Page",
+      "file_type": "document",
+      "source_file": "login.html",
+      "id": "login_page",
+      "community": 9,
+      "norm_label": "login page"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "admin.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "admin_js",
+      "_tgt": "new_website1_admin_apifetch",
+      "source": "admin_js",
+      "target": "new_website1_admin_apifetch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "admin.js",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_src": "admin_js",
+      "_tgt": "new_website1_admin_checkauth",
+      "source": "admin_js",
+      "target": "new_website1_admin_checkauth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "admin.js",
+      "source_location": "L113",
+      "weight": 1.0,
+      "_src": "admin_js",
+      "_tgt": "new_website1_admin_serializebeliefs",
+      "source": "admin_js",
+      "target": "new_website1_admin_serializebeliefs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "admin.js",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_src": "admin_js",
+      "_tgt": "new_website1_admin_serializestaff",
+      "source": "admin_js",
+      "target": "new_website1_admin_serializestaff",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "admin.js",
+      "source_location": "L153",
+      "weight": 1.0,
+      "_src": "admin_js",
+      "_tgt": "new_website1_admin_handlefileupload",
+      "source": "admin_js",
+      "target": "new_website1_admin_handlefileupload",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "admin.js",
+      "source_location": "L257",
+      "weight": 1.0,
+      "_src": "admin_js",
+      "_tgt": "new_website1_admin_serializelists",
+      "source": "admin_js",
+      "target": "new_website1_admin_serializelists",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "admin.js",
+      "source_location": "L285",
+      "weight": 1.0,
+      "_src": "admin_js",
+      "_tgt": "new_website1_admin_loadpagecontent",
+      "source": "admin_js",
+      "target": "new_website1_admin_loadpagecontent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "admin.js",
+      "source_location": "L425",
+      "weight": 1.0,
+      "_src": "admin_js",
+      "_tgt": "new_website1_admin_fetchstudies",
+      "source": "admin_js",
+      "target": "new_website1_admin_fetchstudies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "admin.js",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_src": "new_website1_admin_checkauth",
+      "_tgt": "new_website1_admin_apifetch",
+      "source": "new_website1_admin_apifetch",
+      "target": "new_website1_admin_checkauth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "admin.js",
+      "source_location": "L160",
+      "weight": 1.0,
+      "_src": "new_website1_admin_handlefileupload",
+      "_tgt": "new_website1_admin_apifetch",
+      "source": "new_website1_admin_apifetch",
+      "target": "new_website1_admin_handlefileupload",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "admin.js",
+      "source_location": "L287",
+      "weight": 1.0,
+      "_src": "new_website1_admin_loadpagecontent",
+      "_tgt": "new_website1_admin_apifetch",
+      "source": "new_website1_admin_apifetch",
+      "target": "new_website1_admin_loadpagecontent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "admin.js",
+      "source_location": "L426",
+      "weight": 1.0,
+      "_src": "new_website1_admin_fetchstudies",
+      "_tgt": "new_website1_admin_apifetch",
+      "source": "new_website1_admin_apifetch",
+      "target": "new_website1_admin_fetchstudies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "main.js",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "main_js",
+      "_tgt": "new_website1_main_openmenu",
+      "source": "main_js",
+      "target": "new_website1_main_openmenu",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "main.js",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_src": "main_js",
+      "_tgt": "new_website1_main_closemenu",
+      "source": "main_js",
+      "target": "new_website1_main_closemenu",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "main.js",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_src": "main_js",
+      "_tgt": "new_website1_main_updatetime",
+      "source": "main_js",
+      "target": "new_website1_main_updatetime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "main.js",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_src": "main_js",
+      "_tgt": "new_website1_main_highlightactivemenuitem",
+      "source": "main_js",
+      "target": "new_website1_main_highlightactivemenuitem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "main.js",
+      "source_location": "L117",
+      "weight": 1.0,
+      "_src": "main_js",
+      "_tgt": "new_website1_main_applyglobalfallbacks",
+      "source": "main_js",
+      "target": "new_website1_main_applyglobalfallbacks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "main.js",
+      "source_location": "L134",
+      "weight": 1.0,
+      "_src": "main_js",
+      "_tgt": "new_website1_main_applyhomefallbacks",
+      "source": "main_js",
+      "target": "new_website1_main_applyhomefallbacks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "main.js",
+      "source_location": "L169",
+      "weight": 1.0,
+      "_src": "main_js",
+      "_tgt": "new_website1_main_fetchbiblestudies",
+      "source": "main_js",
+      "target": "new_website1_main_fetchbiblestudies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "main.js",
+      "source_location": "L218",
+      "weight": 1.0,
+      "_src": "main_js",
+      "_tgt": "new_website1_main_injectdynamiccontent",
+      "source": "main_js",
+      "target": "new_website1_main_injectdynamiccontent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "main.js",
+      "source_location": "L321",
+      "weight": 1.0,
+      "_src": "new_website1_main_injectdynamiccontent",
+      "_tgt": "new_website1_main_applyglobalfallbacks",
+      "source": "new_website1_main_applyglobalfallbacks",
+      "target": "new_website1_main_injectdynamiccontent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "main.js",
+      "source_location": "L326",
+      "weight": 1.0,
+      "_src": "new_website1_main_injectdynamiccontent",
+      "_tgt": "new_website1_main_applyhomefallbacks",
+      "source": "new_website1_main_applyhomefallbacks",
+      "target": "new_website1_main_injectdynamiccontent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_src": "server_js",
+      "_tgt": "new_website1_server_runstatement",
+      "source": "server_js",
+      "target": "new_website1_server_runstatement",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_src": "server_js",
+      "_tgt": "new_website1_server_getrows",
+      "source": "server_js",
+      "target": "new_website1_server_getrows",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_src": "server_js",
+      "_tgt": "new_website1_server_closedatabase",
+      "source": "server_js",
+      "target": "new_website1_server_closedatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L99",
+      "weight": 1.0,
+      "_src": "server_js",
+      "_tgt": "new_website1_server_origin",
+      "source": "server_js",
+      "target": "new_website1_server_origin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_src": "server_js",
+      "_tgt": "new_website1_server_requireauth",
+      "source": "server_js",
+      "target": "new_website1_server_requireauth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L143",
+      "weight": 1.0,
+      "_src": "server_js",
+      "_tgt": "new_website1_server_syncfallbackdata",
+      "source": "server_js",
+      "target": "new_website1_server_syncfallbackdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L192",
+      "weight": 1.0,
+      "_src": "server_js",
+      "_tgt": "new_website1_server_ensuredatabaseready",
+      "source": "server_js",
+      "target": "new_website1_server_ensuredatabaseready",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L158",
+      "weight": 1.0,
+      "_src": "new_website1_server_syncfallbackdata",
+      "_tgt": "new_website1_server_runstatement",
+      "source": "new_website1_server_runstatement",
+      "target": "new_website1_server_syncfallbackdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L193",
+      "weight": 1.0,
+      "_src": "new_website1_server_ensuredatabaseready",
+      "_tgt": "new_website1_server_runstatement",
+      "source": "new_website1_server_runstatement",
+      "target": "new_website1_server_ensuredatabaseready",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L152",
+      "weight": 1.0,
+      "_src": "new_website1_server_syncfallbackdata",
+      "_tgt": "new_website1_server_getrows",
+      "source": "new_website1_server_getrows",
+      "target": "new_website1_server_syncfallbackdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L188",
+      "weight": 1.0,
+      "_src": "new_website1_server_syncfallbackdata",
+      "_tgt": "new_website1_server_closedatabase",
+      "source": "new_website1_server_closedatabase",
+      "target": "new_website1_server_syncfallbackdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "server.js",
+      "source_location": "L226",
+      "weight": 1.0,
+      "_src": "new_website1_server_ensuredatabaseready",
+      "_tgt": "new_website1_server_syncfallbackdata",
+      "source": "new_website1_server_syncfallbackdata",
+      "target": "new_website1_server_ensuredatabaseready",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scratch\\test-deps.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "scratch_test_deps_js",
+      "_tgt": "scratch_test_deps_test",
+      "source": "scratch_test_deps_js",
+      "target": "scratch_test_deps_test",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "reads_writes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "server_express",
+      "_tgt": "server_db",
+      "source": "server_express",
+      "target": "server_db"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "server_express",
+      "_tgt": "server_auth",
+      "source": "server_express",
+      "target": "server_auth"
+    },
+    {
+      "relation": "api_requests",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "_src": "admin_logic",
+      "_tgt": "server_express",
+      "source": "server_express",
+      "target": "admin_logic"
+    },
+    {
+      "relation": "api_requests",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "_src": "main_logic",
+      "_tgt": "server_express",
+      "source": "server_express",
+      "target": "main_logic"
+    },
+    {
+      "relation": "initializes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "init_db_script",
+      "_tgt": "server_db",
+      "source": "server_db",
+      "target": "init_db_script"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "server_db",
+      "_tgt": "page_content_table",
+      "source": "server_db",
+      "target": "page_content_table"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "server_db",
+      "_tgt": "bible_studies_table",
+      "source": "server_db",
+      "target": "bible_studies_table"
+    },
+    {
+      "relation": "includes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "admin_page",
+      "_tgt": "admin_logic",
+      "source": "admin_logic",
+      "target": "admin_page"
+    },
+    {
+      "relation": "includes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "index_page",
+      "_tgt": "main_logic",
+      "source": "main_logic",
+      "target": "index_page"
+    }
+  ],
+  "hyperedges": []
+}

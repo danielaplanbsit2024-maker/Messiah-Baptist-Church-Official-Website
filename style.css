@@ -33,7 +33,7 @@
     border: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
     text-align: center;
     align-items: center;
     transition: var(--transition);
@@ -158,8 +158,34 @@ body {
   box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   border-bottom: 1px solid var(--border-color);
+}
+
+/* Hamburger Button */
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: var(--transition);
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.hamburger-btn:hover {
+  color: var(--primary-blue);
+}
+
+.hamburger-btn span {
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .main-nav ul {
@@ -203,6 +229,53 @@ body {
 .main-nav a:hover::after,
 .main-nav a.active::after {
   width: 100%;
+}
+
+/* Dropdown Menus */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-shadow: var(--shadow-md);
+  min-width: 200px;
+  z-index: 200;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-start !important;
+}
+
+.dropdown-menu li a {
+  padding: 0.75rem 1.25rem;
+  white-space: nowrap;
+  border-left: 3px solid transparent;
+}
+
+.dropdown-menu li a:hover {
+  border-left-color: var(--primary-blue);
+  background-color: rgba(52, 152, 219, 0.05);
+}
+
+.dropdown:hover > .dropdown-menu,
+.dropdown.open > .dropdown-menu {
+  display: flex;
+}
+
+.dropdown-icon {
+  font-size: 0.75rem;
+  transition: transform 0.3s ease;
+  margin-left: 4px;
+}
+
+.dropdown.open .dropdown-icon {
+  transform: rotate(180deg);
 }
 
 /* Layout */
@@ -657,49 +730,224 @@ body {
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* ===============================================
+   RESPONSIVE BREAKPOINTS
+   =============================================== */
+
+/* --- Tablet: 992px and below --- */
+@media (max-width: 992px) {
   .main-layout {
     grid-template-columns: 1fr;
   }
 
+  .sidebar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* --- Mobile: 768px and below --- */
+@media (max-width: 768px) {
+  /* Header */
   .header-content {
     flex-direction: column;
     text-align: center;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   .header-info {
     text-align: center;
   }
 
-  .main-nav {
-    overflow-x: auto;
-    padding-bottom: 0;
+  .logo h1 {
+    font-size: 1.6rem;
+  }
+
+  /* Hamburger Nav */
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .main-nav .container {
+    padding: 0;
   }
 
   .main-nav ul {
+    display: none;
+    flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
+    width: 100%;
+    border-top: 1px solid var(--border-color);
+    background: var(--white);
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .main-nav.open ul {
+    display: flex;
+  }
+
+  .main-nav li {
+    width: 100%;
+    border-bottom: 1px solid var(--border-color);
   }
 
   .main-nav a {
-    white-space: nowrap;
-    padding: 1rem;
+    padding: 0.9rem 1.25rem;
+    white-space: normal;
   }
 
+  .main-nav a::after {
+    display: none;
+  }
+
+  /* Dropdowns become static on mobile */
+  .dropdown-menu {
+    position: static;
+    display: flex !important;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    background: rgba(52, 152, 219, 0.04);
+    min-width: 100%;
+  }
+
+  .dropdown-menu li a {
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  .dropdown-icon {
+    display: none;
+  }
+
+  /* Main Layout */
+  .main-layout {
+    padding: 1.5rem 0;
+    gap: 1.5rem;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Hero */
   .hero-image-placeholder {
-    height: 300px;
+    height: 240px;
     padding: 1.5rem;
+    border-radius: 8px;
   }
 
   .hero-content h2 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+
+  /* Schedules */
+  .schedules {
+    padding: 1.5rem;
+  }
+
+  .schedule-item {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  /* Cards */
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Accordion */
+  .accordion-header {
+    padding: 15px 18px;
+  }
+
+  .accordion-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .accordion-content {
+    padding: 0 18px 18px;
+  }
+
+  /* Footer */
   .footer-content {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .site-footer {
+    margin-top: 2rem;
+  }
+
+  /* Map */
+  .map-container iframe {
+    height: 260px;
+  }
+}
+
+/* --- Small Mobile: 480px and below --- */
+@media (max-width: 480px) {
+  .logo h1 {
+    font-size: 1.35rem;
+  }
+
+  .tagline {
+    font-size: 0.82rem;
+  }
+
+  .site-header {
+    padding: 1rem 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .hero-image-placeholder {
+    height: 200px;
+    padding: 1rem;
+  }
+
+  .hero-content h2 {
+    font-size: 1.3rem;
+  }
+
+  .schedules {
+    padding: 1.25rem;
+  }
+
+  .schedules h2 {
+    font-size: 1.4rem;
+  }
+
+  .featured-links h2 {
+    font-size: 1.4rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .pastor-card,
+  .sidebar-card {
+    padding: 1.5rem;
+  }
+
+  .blue-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .footer-content {
+    gap: 1.5rem;
   }
 }
 
